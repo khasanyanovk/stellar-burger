@@ -3,6 +3,7 @@ import cypress from 'cypress';
 const constructor = '[data-cy="constructor"]';
 const modal = '[data-cy="modal"]';
 const closeButton = '[data-cy="close-button"]';
+const addButton = 'Добавить';
 
 beforeEach(function () {
   cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' }).as(
@@ -33,10 +34,10 @@ describe('Добавление ингредиента из списка в ко�
     cy.get(constructor).should('not.contain', 'Ингредиент2-начинка');
 
     cy.contains('li', 'Ингредиент1-булка').within(() => {
-      cy.contains('Добавить').click();
+      cy.contains(addButton).click();
     });
     cy.contains('li', 'Ингредиент2-начинка').within(() => {
-      cy.contains('Добавить').click();
+      cy.contains(addButton).click();
     });
 
     cy.get(constructor).should('contain', 'Ингредиент1-булка');
@@ -75,7 +76,7 @@ describe('Создание заказа', function () {
       cy.contains('Добавить').click();
     });
     cy.contains('li', 'Ингредиент2-начинка').within(() => {
-      cy.contains('Добавить').click();
+      cy.contains(addButton).click();
     });
     cy.get(constructor).should('contain', 'Ингредиент1-булка');
     cy.get(constructor).should('contain', 'Ингредиент2-начинка');
